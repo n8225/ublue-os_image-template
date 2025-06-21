@@ -10,7 +10,8 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux 
+#dnf5 install -y 
+
 
 # Use a COPR Example:
 #
@@ -21,4 +22,17 @@ dnf5 install -y tmux
 
 #### Example for enabling a System Unit File
 
-systemctl enable podman.socket
+#systemctl enable podman.socket
+
+
+CFS_TGZ_URL=$(curl --fail --retry 15 --retry-all-errors -sL \
+    "https://api.github.com/repos/45Drives/cockpit-file-sharing/releases/latest" | \
+    jq -r '.assets[] | select(.name? | match("cockpit-file-sharing-.*.el9.noarch.rpm$")) | .browser_download_url')
+dnf --setopt=install_weak_deps=False install -y "${CFS_TGZ_URL}"
+
+
+
+CI_TGZ_URL=$(curl --fail --retry 15 --retry-all-errors -sL \
+    "https://api.github.com/repos/45Drives/cockpit-identities/releases/latest" | \
+    jq -r '.assets[] | select(.name? | match("cockpit-identities-.*.el8.noarch.rpm$")) | .browser_download_url')
+dnf --setopt=install_weak_deps=False install -y "${CI_TGZ_URL}"
