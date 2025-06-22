@@ -33,7 +33,7 @@ CFS_TGZ_URL=$(curl --fail --retry 15 --retry-all-errors -sL \
 dnf --setopt=install_weak_deps=False install -y "${CFS_TGZ_URL}"
 
 # Install 45Drives identities plugin for cockpit
-CI_TGZ_URL=$(curl --fail --retry 15 --retry-all-errors -sL \
-    "https://api.github.com/repos/45Drives/cockpit-identities/releases/latest" | \
-    jq -r '.assets[] | select(.name? | match("cockpit-identities-.*.el8.noarch.rpm$")) | .browser_download_url')
-dnf --setopt=install_weak_deps=False install -y "${CI_TGZ_URL}"
+#CI_TGZ_URL=$(curl --fail --retry 15 --retry-all-errors -sL \
+#    "https://api.github.com/repos/45Drives/cockpit-identities/releases/latest" | \
+#    jq -r '.assets[] | select(.name? | match("cockpit-identities-.*.el8.noarch.rpm$")) | .browser_download_url')
+#dnf --setopt=install_weak_deps=False install -y "${CI_TGZ_URL}"
